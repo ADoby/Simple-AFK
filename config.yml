@@ -1,0 +1,13 @@
+Prefix:
+  Enabled: true
+  AfkPrefix: "&4[AFK]&f"
+Afk:
+ Enabled: true
+ Time: 60
+ NoLongerAfk: "%PLAYERDISP% is no longer AFK"
+ IsAfk: "%PLAYERDISP% is AFK"
+ Radius: 5
+Kick:
+  Enabled: true
+  Time: 60
+  KickReason: "%PLAYERDISP% was AFK for too long!"

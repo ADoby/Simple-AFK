@@ -1,0 +1,18 @@
+name: Simple AFK
+main: me.thefiscster510.betterafk.Main
+version: 0.1
+description: >
+             An AFK System
+commands:
+  afk:
+    description: Set yourself to AFK
+permissions:
+  simpleafk.exempt:
+    description: Makes the user exempt from being set to AFK
+    default: op
+  simpleafk.afk.self:
+    description: Set self to AFK
+    default: op
+  simpleafk.afk.other:
+    description: Set another player to AFK
+    default: op
