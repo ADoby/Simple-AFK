@@ -47,13 +47,14 @@ public class Main extends JavaPlugin{
 	 @Override
 	 public void onDisable(){
 		 PluginDescriptionFile pdffile = this.getDescription();
+		 Bukkit.getScheduler().cancelAllTasks();
 		 this.logger.info("["+pdffile.getName()+"] " + pdffile.getName() + " V" + pdffile.getVersion() + " has been disabled!");	
 	 }
 	 public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		 if(commandLabel.equalsIgnoreCase("afk")){
 			 
 			 if(sender instanceof Player){
-			 if(!((Player) sender).hasPermission("simpleafk.exempt") || ((Player) sender).isOp()){
+			 
 				if(args.length == 1){
 					if(((Player) sender).hasPermission("simpleafk.afk.other")){
 						for(Player p : getServer().getOnlinePlayers()){
@@ -61,8 +62,12 @@ public class Main extends JavaPlugin{
 								if(functions.isAfk(p)){
 								 	((Player) sender).sendMessage(ChatColor.RED + p.getDisplayName() + " is already set to AFK.");
 							 	}else{
-								 	functions.afk(p, true);
-								 	((Player) sender).sendMessage(ChatColor.YELLOW + p.getDisplayName() + ChatColor.GREEN + " set to AFK");
+							 		if(!p.hasPermission("simpleafk.exempt")){
+							 			functions.afk(p, true);
+							 			((Player) sender).sendMessage(ChatColor.YELLOW + p.getDisplayName() + ChatColor.GREEN + " set to AFK");
+							 		}else{
+							 			((Player) sender).sendMessage(ChatColor.YELLOW + p.getDisplayName() + ChatColor.RED + "Is exempt from SimpleAFK");
+							 		}
 							 	}
 							}
 						}
@@ -72,17 +77,19 @@ public class Main extends JavaPlugin{
 				}else if(args.length > 1){
 					((Player) sender).sendMessage(ChatColor.RED + "Usage: /afk [player]");
 				}else{
-				 if(((Player) sender).hasPermission("simpleafk.afk.self")){
-					 if(functions.isAfk((Player) sender)){
-						 ((Player) sender).sendMessage(ChatColor.RED + "You are already set to AFK.");
-					 }else{
-						 functions.afk(((Player) sender), true);
-					 }
-				 }else{
-					 ((Player) sender).sendMessage(ChatColor.RED + "You don't have permission to do this.");
-				 }
+					if(!((Player) sender).hasPermission("simpleafk.exempt")){
+						if(((Player) sender).hasPermission("simpleafk.afk.self")){
+							if(functions.isAfk((Player) sender)){
+								((Player) sender).sendMessage(ChatColor.RED + "You are already set to AFK.");
+							}else{
+								functions.afk(((Player) sender), true);
+							}
+						}else{
+							((Player) sender).sendMessage(ChatColor.RED + "You don't have permission to do this.");
+						}
+					}
 				}
-			 }
+			 
 				 	
 			 }else{
 				 this.logger.info("This command must be used in game.");

@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -34,6 +35,10 @@ public class EnvListen implements Listener{
 	}
 	@EventHandler
 	public void onPlayerLeave(PlayerQuitEvent e){
+		Afk.time.remove(e.getPlayer());
+	}
+	@EventHandler
+	public void onPlayerLeave2(PlayerKickEvent e){
 		Afk.time.remove(e.getPlayer());
 	}
 	@EventHandler

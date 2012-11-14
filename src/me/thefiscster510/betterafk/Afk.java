@@ -12,7 +12,7 @@ public class Afk implements Runnable{
 	@Override
 	public void run() {
 		for(Player p : time.keySet()){
-			if(!p.hasPermission("simpleafk.exempt") || p.isOp()){
+			if(!p.hasPermission("simpleafk.exempt")){
 				time.put(p, time.get(p) + 1);
 				try{
 				if(time.get(p) == Main.plugin.getConfig().getInt("Afk.Time") * 20){
