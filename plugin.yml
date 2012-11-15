@@ -1,6 +1,6 @@
 name: Simple AFK
 main: me.thefiscster510.betterafk.Main
-version: 0.5
+version: 0.6
 description: >
              An AFK System
 commands:

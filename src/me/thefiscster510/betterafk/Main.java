@@ -48,7 +48,11 @@ public class Main extends JavaPlugin{
 	 public void onDisable(){
 		 PluginDescriptionFile pdffile = this.getDescription();
 		 Bukkit.getScheduler().cancelAllTasks();
-		 this.logger.info("["+pdffile.getName()+"] " + pdffile.getName() + " V" + pdffile.getVersion() + " has been disabled!");	
+		 this.logger.info("["+pdffile.getName()+"] " + pdffile.getName() + " V" + pdffile.getVersion() + " has been disabled!");
+		//Remove any AFK tags
+		 for(Player p : getServer().getOnlinePlayers()){
+			 p.setDisplayName(p.getDisplayName().replace(getConfig().getString("Prefix.AfkPrefix"), ""));
+		 }
 	 }
 	 public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
 		 if(commandLabel.equalsIgnoreCase("afk")){
